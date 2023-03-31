@@ -1,6 +1,5 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:code_id_network/code_id_network.dart';
-import 'package:code_id_storage/code_id_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:weatherapp_ddd/domain/weather/i_weather_repo.dart';
 import 'package:weatherapp_ddd/domain/weather/weather_failure.dart';
@@ -13,12 +12,8 @@ class WeatherRepo extends IWeatherRepo {
 
   @override
   Future<Either<WeatherFailure, List<WeatherModel>>> getWeather() async {
-    IStorage storage = Storage;
-    await storage.openBox('weather');
-    var appID = await storage.getData(key: 'apiKey');
-
     var response = await network.getHttp(path: '/weather', queryParameter: {
-      'appId': appID,
+      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
       'lat': -6.3687594,
       'lon': 106.8624118,
       'units': 'metric'
@@ -33,6 +28,8 @@ class WeatherRepo extends IWeatherRepo {
       (r) {
         List<WeatherModel> data = [];
         data.add(WeatherModel.fromJson(r));
+
+        // data.add(WeatherModel.fromJson(json.decode(r.toString())));
         return right(data);
       },
     );
@@ -40,12 +37,8 @@ class WeatherRepo extends IWeatherRepo {
 
   @override
   Future<Either<WeatherFailure, List<WeatherModel>>> getForecast() async {
-    IStorage storage = Storage;
-    await storage.openBox('weather');
-    var appID = await storage.getData(key: 'apiKey');
-
     var response = await network.getHttp(path: '/forecast', queryParameter: {
-      'appId': appID,
+      'appId': '',
       'lat': -6.3687594,
       'lon': 106.8624118,
       'units': 'metric'

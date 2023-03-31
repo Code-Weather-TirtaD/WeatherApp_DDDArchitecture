@@ -8,20 +8,20 @@ part of 'weather_model.dart';
 
 _$_WeatherModel _$$_WeatherModelFromJson(Map<String, dynamic> json) =>
     _$_WeatherModel(
-      weather: json['weather'] as String,
-      weatherDescription: json['weatherDescription'] as String,
-      weatherIcon: json['weatherIcon'] as String,
-      city: json['city'] as String,
-      temperature: json['temperature'] as num,
-      temperatureFeel: json['temperatureFeel'] as num,
-      temperatureMin: json['temperatureMin'] as num,
-      temparatureMax: json['temparatureMax'] as num,
-      humidity: json['humidity'] as int,
-      pressure: json['pressure'] as int,
-      visibility: json['visibility'] as int,
-      windSpeed: json['windSpeed'] as num,
-      windDirection: json['windDirection'] as int,
-      dt: json['dt'] as int,
+      weather: json['weather'][0]['main'],
+      weatherDescription: json['weather'][0]['description'],
+      weatherIcon: json['weather'][0]['icon'],
+      city: json['name'],
+      temperature: json['main']['temp'],
+      temperatureFeel: json['main']['feels_like'],
+      temperatureMin: json['main']['temp_min'],
+      temparatureMax: json['main']['temp_max'],
+      humidity: json['main']['humidity'],
+      pressure: json['main']['pressure'],
+      visibility: json['visibility'],
+      windSpeed: json['wind']['speed'],
+      windDirection: json['wind']['deg'],
+      dt: json['dt'],
     );
 
 Map<String, dynamic> _$$_WeatherModelToJson(_$_WeatherModel instance) =>

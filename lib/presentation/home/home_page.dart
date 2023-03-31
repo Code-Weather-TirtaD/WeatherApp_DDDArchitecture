@@ -11,8 +11,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: ((context) => getIt<WeatherBloc>()),
+    return BlocProvider<WeatherBloc>(
+      create: ((context) =>
+          getIt<WeatherBloc>()..add(const WeatherEvent.weatherChanged())),
       child: const HomeScreen(),
     );
   }

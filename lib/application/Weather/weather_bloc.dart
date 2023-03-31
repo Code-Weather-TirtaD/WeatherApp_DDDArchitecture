@@ -16,24 +16,28 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   WeatherBloc(this.weatherRepo) : super(WeatherState.initial()) {
     on<WeatherEvent>((event, emit) async {
       await event.when(
-          started: () {},
-          weatherChanged: () async {
-            emit(WeatherState.initial());
-            emit(state.copyWith(isLoading: true));
+        started: () async {
+          // emit(WeatherState.initial());
+          // emit(state.copyWith(isLoading: true));
+        },
+        weatherChanged: () async {
+          emit(WeatherState.initial());
+          emit(state.copyWith(isLoading: false));
+          var weatherDataRespone = await weatherRepo.getWeather();
+          // var forecastDataresponse = await weatherRepo.getWeather();
+          // print(weatherDataRespone);
 
-            var weatherDataRespone = await weatherRepo.getWeather();
-            var forecastDataresponse = await weatherRepo.getWeather();
+          weatherDataRespone.match(
+            (l) => left(l),
+            (r) => emit(state.copyWith(weatherData: r)),
+          );
 
-            weatherDataRespone.match(
-              (l) => left(l),
-              (r) => emit(state.copyWith(weatherData: r)),
-            );
-
-            forecastDataresponse.match(
-              (l) => left(l),
-              (r) => emit(state.copyWith(isLoading: false, forecastData: r)),
-            );
-          });
+          // forecastDataresponse.match(
+          //   (l) => left(l),
+          //   (r) => emit(state.copyWith(isLoading: true, forecastData: r)),
+          // );
+        },
+      );
     });
   }
 }

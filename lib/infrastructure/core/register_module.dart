@@ -20,17 +20,12 @@ abstract class RegisterModule {
     @Named('base_url') String baseUrl,
     // @Named('api_key') String apiKey,
   ) async {
-    IStorage storage = Storage;
-    await storage.openBox('weather');
-    await storage.putData(data: {'apiKey': weatherApiKey});
-    final client = NetworkService(baseUrl: baseUrl);
-
+    final client = NetworkService(baseUrl: weatherUrl);
     // client.headers = {'apiKey': apiKey};
     client.addInterceptors([
       LoggerInterceptor(),
     ]);
 
-    await storage.close();
     return client;
   }
 }

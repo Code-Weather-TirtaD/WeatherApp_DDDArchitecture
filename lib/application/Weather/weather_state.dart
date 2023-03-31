@@ -10,7 +10,7 @@ class WeatherState with _$WeatherState {
 
   factory WeatherState.initial() => WeatherState(
         isLoading: false,
-        weatherData: [],
-        forecastData: [],
+        weatherData: <WeatherModel>[],
+        forecastData: <WeatherModel>[],
       );
 }
