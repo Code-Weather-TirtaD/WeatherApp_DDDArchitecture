@@ -26,7 +26,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           var weatherDataRespone = await weatherRepo.getWeather();
           var forecastDataresponse = await weatherRepo.getForecast();
 
-          print(forecastDataresponse);
           weatherDataRespone.match(
             (l) => left(l),
             (r) => emit(state.copyWith(weatherData: r)),

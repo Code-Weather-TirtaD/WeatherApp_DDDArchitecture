@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final iconUrl = 'http://openweathermap.org/img/wn/';
+    const iconUrl = 'http://openweathermap.org/img/wn/';
 
     return Scaffold(
       appBar: AppBar(
