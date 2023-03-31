@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:code_id_network/code_id_network.dart';
-import 'package:code_id_storage/code_id_storage.dart';
 import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 
 @module

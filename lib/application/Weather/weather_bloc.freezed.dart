@@ -280,7 +280,7 @@ abstract class _weatherChanged implements WeatherEvent {
 /// @nodoc
 mixin _$WeatherState {
   bool get isLoading => throw _privateConstructorUsedError;
-  List<WeatherModel> get weatherData => throw _privateConstructorUsedError;
+  WeatherModel get weatherData => throw _privateConstructorUsedError;
   List<WeatherModel> get forecastData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -296,8 +296,10 @@ abstract class $WeatherStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      List<WeatherModel> weatherData,
+      WeatherModel weatherData,
       List<WeatherModel> forecastData});
+
+  $WeatherModelCopyWith<$Res> get weatherData;
 }
 
 /// @nodoc
@@ -325,12 +327,20 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
       weatherData: null == weatherData
           ? _value.weatherData
           : weatherData // ignore: cast_nullable_to_non_nullable
-              as List<WeatherModel>,
+              as WeatherModel,
       forecastData: null == forecastData
           ? _value.forecastData
           : forecastData // ignore: cast_nullable_to_non_nullable
               as List<WeatherModel>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherModelCopyWith<$Res> get weatherData {
+    return $WeatherModelCopyWith<$Res>(_value.weatherData, (value) {
+      return _then(_value.copyWith(weatherData: value) as $Val);
+    });
   }
 }
 
@@ -344,8 +354,11 @@ abstract class _$$_WeatherStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      List<WeatherModel> weatherData,
+      WeatherModel weatherData,
       List<WeatherModel> forecastData});
+
+  @override
+  $WeatherModelCopyWith<$Res> get weatherData;
 }
 
 /// @nodoc
@@ -369,9 +382,9 @@ class __$$_WeatherStateCopyWithImpl<$Res>
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       weatherData: null == weatherData
-          ? _value._weatherData
+          ? _value.weatherData
           : weatherData // ignore: cast_nullable_to_non_nullable
-              as List<WeatherModel>,
+              as WeatherModel,
       forecastData: null == forecastData
           ? _value._forecastData
           : forecastData // ignore: cast_nullable_to_non_nullable
@@ -385,21 +398,14 @@ class __$$_WeatherStateCopyWithImpl<$Res>
 class _$_WeatherState implements _WeatherState {
   _$_WeatherState(
       {required this.isLoading,
-      required final List<WeatherModel> weatherData,
+      required this.weatherData,
       required final List<WeatherModel> forecastData})
-      : _weatherData = weatherData,
-        _forecastData = forecastData;
+      : _forecastData = forecastData;
 
   @override
   final bool isLoading;
-  final List<WeatherModel> _weatherData;
   @override
-  List<WeatherModel> get weatherData {
-    if (_weatherData is EqualUnmodifiableListView) return _weatherData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_weatherData);
-  }
-
+  final WeatherModel weatherData;
   final List<WeatherModel> _forecastData;
   @override
   List<WeatherModel> get forecastData {
@@ -420,17 +426,14 @@ class _$_WeatherState implements _WeatherState {
             other is _$_WeatherState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality()
-                .equals(other._weatherData, _weatherData) &&
+            (identical(other.weatherData, weatherData) ||
+                other.weatherData == weatherData) &&
             const DeepCollectionEquality()
                 .equals(other._forecastData, _forecastData));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      const DeepCollectionEquality().hash(_weatherData),
+  int get hashCode => Object.hash(runtimeType, isLoading, weatherData,
       const DeepCollectionEquality().hash(_forecastData));
 
   @JsonKey(ignore: true)
@@ -443,13 +446,13 @@ class _$_WeatherState implements _WeatherState {
 abstract class _WeatherState implements WeatherState {
   factory _WeatherState(
       {required final bool isLoading,
-      required final List<WeatherModel> weatherData,
+      required final WeatherModel weatherData,
       required final List<WeatherModel> forecastData}) = _$_WeatherState;
 
   @override
   bool get isLoading;
   @override
-  List<WeatherModel> get weatherData;
+  WeatherModel get weatherData;
   @override
   List<WeatherModel> get forecastData;
   @override

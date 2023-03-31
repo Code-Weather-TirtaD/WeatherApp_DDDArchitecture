@@ -9,15 +9,17 @@ import 'package:weatherapp_ddd/infrastructure/weather/weather_model.dart';
 class WeatherRepo extends IWeatherRepo {
   WeatherRepo(this.network);
   final INetworkService network;
+  final params = {
+    'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
+    'lat': -6.3687594,
+    'lon': 106.8624118,
+    'units': 'metric',
+  };
 
   @override
-  Future<Either<WeatherFailure, List<WeatherModel>>> getWeather() async {
-    var response = await network.getHttp(path: '/weather', queryParameter: {
-      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
-      'lat': -6.3687594,
-      'lon': 106.8624118,
-      'units': 'metric'
-    });
+  Future<Either<WeatherFailure, WeatherModel>> getWeather() async {
+    var response =
+        await network.getHttp(path: '/weather', queryParameter: params);
 
     return response.match(
       (l) => l.when(
@@ -26,23 +28,18 @@ class WeatherRepo extends IWeatherRepo {
           timeout: () => left(const WeatherFailure.noInternet()),
           other: (val) => left(const WeatherFailure.noInternet())),
       (r) {
-        List<WeatherModel> data = [];
-        data.add(WeatherModel.fromJson(r));
+        // List<WeatherModel> data = [];
+        // data.add(WeatherModel.fromJson(r));
 
-        // data.add(WeatherModel.fromJson(json.decode(r.toString())));
-        return right(data);
+        return right(WeatherModel.fromJson(r));
       },
     );
   }
 
   @override
   Future<Either<WeatherFailure, List<WeatherModel>>> getForecast() async {
-    var response = await network.getHttp(path: '/forecast', queryParameter: {
-      'appId': '',
-      'lat': -6.3687594,
-      'lon': 106.8624118,
-      'units': 'metric'
-    });
+    var response =
+        await network.getHttp(path: '/forecast', queryParameter: params);
 
     return response.match(
       (l) => l.when(
@@ -54,6 +51,7 @@ class WeatherRepo extends IWeatherRepo {
         List jsonDatas = r["list"] as List;
         List<WeatherModel> datas = List<WeatherModel>.from(
             jsonDatas.map((e) => WeatherModel.fromJson(e))).toList();
+
         return right(datas);
       },
     );

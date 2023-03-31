@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherapp_ddd/application/Weather/weather_bloc.dart';
+import 'package:weatherapp_ddd/presentation/home/widgets/daily_forecast.dart';
+import 'package:weatherapp_ddd/presentation/home/widgets/hourly_forecast.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,8 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // final WeatherBloc bloc = context.read<WeatherBloc>();
     final size = MediaQuery.of(context).size;
+    final iconUrl = 'http://openweathermap.org/img/wn/';
 
     return Scaffold(
       appBar: AppBar(
@@ -65,23 +66,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // ImageIcon(
-                            //   NetworkImage(iconUrl),
-                            //   size: 70,
-                            // ),
+                            ImageIcon(
+                              NetworkImage(
+                                  '$iconUrl${state.weatherData.weatherIcon}@2x.png'),
+                              size: 70,
+                            ),
                             Column(children: [
-                              Text(state.weatherData[0].weather),
-                              Text(state.weatherData[0].weatherDescription)
+                              Text(state.weatherData.weather),
+                              Text(state.weatherData.weatherDescription)
                             ])
                           ],
                         ),
                         Text(
-                          "${state.weatherData[0].temperature.round()} \u2103",
+                          "${state.weatherData.temperature.round()} \u2103",
                           style: const TextStyle(
                               fontSize: 70, fontWeight: FontWeight.w200),
                         ),
                         Text(
-                          "Temperature Feel: ${state.weatherData[0].temperatureFeel.round()} \u2103",
+                          "Temperature Feel: ${state.weatherData.temperatureFeel.round()} \u2103",
                         ),
                       ]),
                 ),
@@ -101,19 +103,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisSpacing: 2,
                               mainAxisSpacing: 2),
                       children: [
-                        Text("Wind: ${state.weatherData[0].windSpeed} m/s"),
-                        Text("Humidity: ${state.weatherData[0].humidity} %"),
+                        Text("Wind: ${state.weatherData.windSpeed} m/s"),
+                        Text("Humidity: ${state.weatherData.humidity} %"),
                         Text(
-                            "Min Temp: ${state.weatherData[0].temperatureMin.round()} \u2103"),
-                        Text("Pressure: ${state.weatherData[0].pressure} hPa"),
+                            "Min Temp: ${state.weatherData.temperatureMin.round()} \u2103"),
+                        Text("Pressure: ${state.weatherData.pressure} hPa"),
                         Text(
-                            "Visibility: ${(state.weatherData[0].visibility / 1000)} KM"),
+                            "Visibility: ${(state.weatherData.visibility / 1000)} KM"),
                         Text(
-                            "Max Temp: ${state.weatherData[0].temparatureMax.round()} \u2103"),
+                            "Max Temp: ${state.weatherData.temparatureMax.round()} \u2103"),
                       ],
                     ),
                   ),
                 ),
+                HourlyForecast(
+                    size: size, iconUrl: iconUrl, data: state.forecastData),
+                DailyForecast(iconUrl: iconUrl, data: state.forecastData)
               ],
             ),
           );

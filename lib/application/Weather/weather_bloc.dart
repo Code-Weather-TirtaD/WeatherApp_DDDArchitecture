@@ -24,18 +24,18 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
           emit(WeatherState.initial());
           emit(state.copyWith(isLoading: false));
           var weatherDataRespone = await weatherRepo.getWeather();
-          // var forecastDataresponse = await weatherRepo.getWeather();
-          // print(weatherDataRespone);
+          var forecastDataresponse = await weatherRepo.getForecast();
 
+          print(forecastDataresponse);
           weatherDataRespone.match(
             (l) => left(l),
             (r) => emit(state.copyWith(weatherData: r)),
           );
 
-          // forecastDataresponse.match(
-          //   (l) => left(l),
-          //   (r) => emit(state.copyWith(isLoading: true, forecastData: r)),
-          // );
+          forecastDataresponse.match(
+            (l) => left(l),
+            (r) => emit(state.copyWith(forecastData: r)),
+          );
         },
       );
     });

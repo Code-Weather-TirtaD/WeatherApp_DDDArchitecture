@@ -11,7 +11,6 @@ abstract class WeatherModel with _$WeatherModel {
     required String weather,
     required String weatherDescription,
     required String weatherIcon,
-    required String city,
     required num temperature,
     required num temperatureFeel,
     required num temperatureMin,

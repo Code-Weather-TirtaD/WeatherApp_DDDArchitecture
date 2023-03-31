@@ -23,7 +23,6 @@ mixin _$WeatherModel {
   String get weather => throw _privateConstructorUsedError;
   String get weatherDescription => throw _privateConstructorUsedError;
   String get weatherIcon => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
   num get temperature => throw _privateConstructorUsedError;
   num get temperatureFeel => throw _privateConstructorUsedError;
   num get temperatureMin => throw _privateConstructorUsedError;
@@ -51,7 +50,6 @@ abstract class $WeatherModelCopyWith<$Res> {
       {String weather,
       String weatherDescription,
       String weatherIcon,
-      String city,
       num temperature,
       num temperatureFeel,
       num temperatureMin,
@@ -80,7 +78,6 @@ class _$WeatherModelCopyWithImpl<$Res, $Val extends WeatherModel>
     Object? weather = null,
     Object? weatherDescription = null,
     Object? weatherIcon = null,
-    Object? city = null,
     Object? temperature = null,
     Object? temperatureFeel = null,
     Object? temperatureMin = null,
@@ -104,10 +101,6 @@ class _$WeatherModelCopyWithImpl<$Res, $Val extends WeatherModel>
       weatherIcon: null == weatherIcon
           ? _value.weatherIcon
           : weatherIcon // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
               as String,
       temperature: null == temperature
           ? _value.temperature
@@ -165,7 +158,6 @@ abstract class _$$_WeatherModelCopyWith<$Res>
       {String weather,
       String weatherDescription,
       String weatherIcon,
-      String city,
       num temperature,
       num temperatureFeel,
       num temperatureMin,
@@ -192,7 +184,6 @@ class __$$_WeatherModelCopyWithImpl<$Res>
     Object? weather = null,
     Object? weatherDescription = null,
     Object? weatherIcon = null,
-    Object? city = null,
     Object? temperature = null,
     Object? temperatureFeel = null,
     Object? temperatureMin = null,
@@ -216,10 +207,6 @@ class __$$_WeatherModelCopyWithImpl<$Res>
       weatherIcon: null == weatherIcon
           ? _value.weatherIcon
           : weatherIcon // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
               as String,
       temperature: null == temperature
           ? _value.temperature
@@ -272,7 +259,6 @@ class _$_WeatherModel extends _WeatherModel {
       {required this.weather,
       required this.weatherDescription,
       required this.weatherIcon,
-      required this.city,
       required this.temperature,
       required this.temperatureFeel,
       required this.temperatureMin,
@@ -294,8 +280,6 @@ class _$_WeatherModel extends _WeatherModel {
   final String weatherDescription;
   @override
   final String weatherIcon;
-  @override
-  final String city;
   @override
   final num temperature;
   @override
@@ -319,7 +303,7 @@ class _$_WeatherModel extends _WeatherModel {
 
   @override
   String toString() {
-    return 'WeatherModel(weather: $weather, weatherDescription: $weatherDescription, weatherIcon: $weatherIcon, city: $city, temperature: $temperature, temperatureFeel: $temperatureFeel, temperatureMin: $temperatureMin, temparatureMax: $temparatureMax, humidity: $humidity, pressure: $pressure, visibility: $visibility, windSpeed: $windSpeed, windDirection: $windDirection, dt: $dt)';
+    return 'WeatherModel(weather: $weather, weatherDescription: $weatherDescription, weatherIcon: $weatherIcon, temperature: $temperature, temperatureFeel: $temperatureFeel, temperatureMin: $temperatureMin, temparatureMax: $temparatureMax, humidity: $humidity, pressure: $pressure, visibility: $visibility, windSpeed: $windSpeed, windDirection: $windDirection, dt: $dt)';
   }
 
   @override
@@ -332,7 +316,6 @@ class _$_WeatherModel extends _WeatherModel {
                 other.weatherDescription == weatherDescription) &&
             (identical(other.weatherIcon, weatherIcon) ||
                 other.weatherIcon == weatherIcon) &&
-            (identical(other.city, city) || other.city == city) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
             (identical(other.temperatureFeel, temperatureFeel) ||
@@ -361,7 +344,6 @@ class _$_WeatherModel extends _WeatherModel {
       weather,
       weatherDescription,
       weatherIcon,
-      city,
       temperature,
       temperatureFeel,
       temperatureMin,
@@ -392,7 +374,6 @@ abstract class _WeatherModel extends WeatherModel {
       {required final String weather,
       required final String weatherDescription,
       required final String weatherIcon,
-      required final String city,
       required final num temperature,
       required final num temperatureFeel,
       required final num temperatureMin,
@@ -414,8 +395,6 @@ abstract class _WeatherModel extends WeatherModel {
   String get weatherDescription;
   @override
   String get weatherIcon;
-  @override
-  String get city;
   @override
   num get temperature;
   @override
