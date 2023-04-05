@@ -22,7 +22,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         },
         weatherChanged: () async {
           emit(WeatherState.initial());
-          emit(state.copyWith(isLoading: false));
           var weatherDataRespone = await weatherRepo.getWeather();
           var forecastDataresponse = await weatherRepo.getForecast();
 
@@ -35,6 +34,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
             (l) => left(l),
             (r) => emit(state.copyWith(forecastData: r)),
           );
+
+          emit(state.copyWith(isLoading: false));
         },
       );
     });
