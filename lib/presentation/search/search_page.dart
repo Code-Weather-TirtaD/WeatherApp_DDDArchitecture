@@ -33,18 +33,10 @@ class _SearchScreenState extends State<SearchScreen> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: TextFormField(
             controller: searchController,
-            decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(15),
-                prefixIcon: IconButton(
-                    icon: const Icon(Icons.arrow_back_rounded),
-                    onPressed: () {
-                      // Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => const HomePage(
-                      //             lat: -6.3687594, long: 106.8624118)));
-                    }),
-                suffixIcon: Icon(Icons.search_rounded)),
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.all(15),
+              suffixIcon: Icon(Icons.search_rounded),
+            ),
             onFieldSubmitted: (value) {
               searchController.text = value.toString();
               setState(() {
@@ -78,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 });
           } else {
             return ListTile(
-                leading: Icon(Icons.location_on_outlined),
+                leading: const Icon(Icons.location_on_outlined),
                 title: Text(searchController.text));
           }
         },

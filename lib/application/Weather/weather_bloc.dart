@@ -14,16 +14,19 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final IWeatherRepo weatherRepo;
 
   WeatherBloc(this.weatherRepo) : super(WeatherState.initial()) {
+    // double latitude = 0.0;
+    // double longitude = 0.0;
+
     on<WeatherEvent>((event, emit) async {
       await event.when(
-        started: () async {
-          // emit(WeatherState.initial());
-          // emit(state.copyWith(isLoading: true));
-        },
-        weatherChanged: () async {
+        started: () async {},
+        weatherChanged: (latitude, longitude) async {
           emit(WeatherState.initial());
-          var weatherDataRespone = await weatherRepo.getWeather();
-          var forecastDataresponse = await weatherRepo.getForecast();
+
+          var weatherDataRespone = await weatherRepo.getWeather(
+              latitude: latitude, longitude: longitude);
+          var forecastDataresponse = await weatherRepo.getForecast(
+              latitude: latitude, longitude: longitude);
 
           weatherDataRespone.match(
             (l) => left(l),

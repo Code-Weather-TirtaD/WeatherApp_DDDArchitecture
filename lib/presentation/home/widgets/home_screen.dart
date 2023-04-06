@@ -25,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.search_rounded),
-            onPressed: () {},
+            onPressed: () {
+              router.push(const SearchRoute());
+            },
           ),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,9 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           )),
       body: BlocBuilder<WeatherBloc, WeatherState>(
-        // buildWhen: (context, state) {
-        //   return !state.isLoading;
-        // },
         builder: (context, state) {
           context.read<WeatherBloc>();
 
@@ -55,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   // Temperature Degrees
-                  // StreamBuilder(builder: builder),
                   Container(
                     color: Colors.indigo[100],
                     height: size.height * 0.25,
@@ -115,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  // Forecast Widgets
                   HourlyForecast(
                       size: size, iconUrl: iconUrl, data: state.forecastData),
                   DailyForecast(iconUrl: iconUrl, data: state.forecastData)

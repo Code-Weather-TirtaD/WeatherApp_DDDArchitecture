@@ -9,37 +9,56 @@ import 'package:weatherapp_ddd/infrastructure/weather/weather_model.dart';
 class WeatherRepo extends IWeatherRepo {
   WeatherRepo(this.network);
   final INetworkService network;
-  final params = {
-    'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
-    'lat': -6.3687594,
-    'lon': 106.8624118,
-    'units': 'metric',
-  };
+  // final params = {
+  //   'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
+  //   'lat': -6.3687594,
+  //   'lon': 106.8624118,
+  //   // 'lat': pos.latitude,
+  //   // 'lon': pos.longitude,
+  //   'units': 'metric',
+  // };
 
   @override
-  Future<Either<WeatherFailure, WeatherModel>> getWeather() async {
-    var response =
-        await network.getHttp(path: '/weather', queryParameter: params);
+  Future<Either<WeatherFailure, WeatherModel>> getWeather(
+      {required double latitude, required double longitude}) async {
+    final params = {
+      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
+      'lat': latitude,
+      'lon': longitude,
+      'units': 'metric',
+    };
+
+    var response = await network.getHttp(
+      path: '/weather',
+      queryParameter: params,
+    );
 
     return response.match(
       (l) => l.when(
           noInternet: () => left(const WeatherFailure.noInternet()),
           serverError: (response) => left(const WeatherFailure.failed()),
-          timeout: () => left(const WeatherFailure.noInternet()),
-          other: (val) => left(const WeatherFailure.noInternet())),
+          timeout: () => left(const WeatherFailure.failed()),
+          other: (val) => left(const WeatherFailure.failed())),
       (r) {
-        // List<WeatherModel> data = [];
-        // data.add(WeatherModel.fromJson(r));
-
         return right(WeatherModel.fromJson(r));
       },
     );
   }
 
   @override
-  Future<Either<WeatherFailure, List<WeatherModel>>> getForecast() async {
-    var response =
-        await network.getHttp(path: '/forecast', queryParameter: params);
+  Future<Either<WeatherFailure, List<WeatherModel>>> getForecast(
+      {required double latitude, required double longitude}) async {
+    final params = {
+      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
+      'lat': latitude,
+      'lon': longitude,
+      'units': 'metric',
+    };
+
+    var response = await network.getHttp(
+      path: '/forecast',
+      queryParameter: params,
+    );
 
     return response.match(
       (l) => l.when(
