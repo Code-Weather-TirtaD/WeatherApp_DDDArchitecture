@@ -9,7 +9,7 @@ class WeatherState with _$WeatherState {
   }) = _WeatherState;
 
   factory WeatherState.initial() => WeatherState(
-        isLoading: true,
+        isLoading: false,
         weatherData: WeatherModel(
             weather: '',
             weatherDescription: '',

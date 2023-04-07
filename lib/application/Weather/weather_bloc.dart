@@ -22,6 +22,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         started: () async {},
         weatherChanged: (latitude, longitude) async {
           emit(WeatherState.initial());
+          emit(state.copyWith(isLoading: true));
 
           var weatherDataRespone = await weatherRepo.getWeather(
               latitude: latitude, longitude: longitude);

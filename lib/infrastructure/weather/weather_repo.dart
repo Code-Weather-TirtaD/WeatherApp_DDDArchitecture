@@ -9,28 +9,22 @@ import 'package:weatherapp_ddd/infrastructure/weather/weather_model.dart';
 class WeatherRepo extends IWeatherRepo {
   WeatherRepo(this.network);
   final INetworkService network;
-  // final params = {
-  //   'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
-  //   'lat': -6.3687594,
-  //   'lon': 106.8624118,
-  //   // 'lat': pos.latitude,
-  //   // 'lon': pos.longitude,
-  //   'units': 'metric',
-  // };
+
+  Map<String, dynamic> param(double lat, double lon) {
+    return {
+      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
+      'lat': lat,
+      'lon': lon,
+      'units': 'metric',
+    };
+  }
 
   @override
   Future<Either<WeatherFailure, WeatherModel>> getWeather(
       {required double latitude, required double longitude}) async {
-    final params = {
-      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
-      'lat': latitude,
-      'lon': longitude,
-      'units': 'metric',
-    };
-
     var response = await network.getHttp(
       path: '/weather',
-      queryParameter: params,
+      queryParameter: param(latitude, longitude),
     );
 
     return response.match(
@@ -48,16 +42,9 @@ class WeatherRepo extends IWeatherRepo {
   @override
   Future<Either<WeatherFailure, List<WeatherModel>>> getForecast(
       {required double latitude, required double longitude}) async {
-    final params = {
-      'appId': 'f0fae4ef95fddcef4aafa2e11e7e738f',
-      'lat': latitude,
-      'lon': longitude,
-      'units': 'metric',
-    };
-
     var response = await network.getHttp(
       path: '/forecast',
-      queryParameter: params,
+      queryParameter: param(latitude, longitude),
     );
 
     return response.match(

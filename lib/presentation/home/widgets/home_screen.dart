@@ -43,9 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state) {
-          context.read<WeatherBloc>();
-
-          if (state.isLoading) {
+          if (state.isLoading || state.forecastData.isEmpty) {
             debugPrint(state.isLoading.toString());
             return const Center(child: CircularProgressIndicator());
           } else {
