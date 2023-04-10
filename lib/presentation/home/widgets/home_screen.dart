@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherapp_ddd/presentation/injection.dart';
+import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 import 'package:weatherapp_ddd/application/Weather/weather_bloc.dart';
 import 'package:weatherapp_ddd/presentation/home/widgets/daily_forecast.dart';
 import 'package:weatherapp_ddd/presentation/home/widgets/hourly_forecast.dart';
-import 'package:weatherapp_ddd/presentation/injection.dart';
-import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -43,8 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state) {
-          if (state.isLoading || state.forecastData.isEmpty) {
-            debugPrint(state.isLoading.toString());
+          if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());
           } else {
             return SingleChildScrollView(

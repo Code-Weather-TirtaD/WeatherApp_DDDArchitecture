@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weatherapp_ddd/application/Location/location_bloc.dart';
 import 'package:weatherapp_ddd/presentation/injection.dart';
 import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
+import 'package:weatherapp_ddd/application/Location/location_bloc.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -29,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.all(15),
               suffixIcon: Icon(Icons.search_rounded),
-              border: UnderlineInputBorder(),
+              border: InputBorder.none,
             ),
             onFieldSubmitted: (value) {
               searchController.text = value;
@@ -40,7 +40,12 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
-      body: BlocBuilder<LocationBloc, LocationState>(
+      body: BlocConsumer<LocationBloc, LocationState>(
+        listener: (context, state) {
+          if (state.searchClick) {
+            router.replace(const HomeRoute());
+          }
+        },
         builder: (context, state) {
           if (state.location.isEmpty) {
             return ListTile(
@@ -60,8 +65,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     leading: const Icon(Icons.location_searching),
                     title: Text(
                         '${state.location[index].city}, ${state.location[index].stateCity}'),
-                    onTap: () {
-                      router.replace(const HomeRoute());
+                    onTap: () async {
+                      context.read<LocationBloc>().add(
+                          LocationEvent.saveLocation(state.location[index]));
+
+                      // pindahin ke listener
+                      // router.replace(const HomeRoute());
                     },
                   );
                 });

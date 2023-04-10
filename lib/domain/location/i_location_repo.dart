@@ -5,6 +5,7 @@ import 'package:weatherapp_ddd/infrastructure/location/location_model.dart';
 
 abstract class ILocationRepo {
   Future<Position> locationService();
+  Future<void> saveLocation({required input});
   Future<Either<WeatherFailure, List<LocationModel>>> getCurrentLocation(
       {required double latitude, required double longitude});
   Future<Either<WeatherFailure, List<LocationModel>>> getSearchLocation(

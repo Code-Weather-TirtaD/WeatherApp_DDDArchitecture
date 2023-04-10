@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weatherapp_ddd/domain/location/i_location_repo.dart';
 import 'package:weatherapp_ddd/infrastructure/location/location_model.dart';
 
@@ -16,6 +16,10 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc(this.locationRepo) : super(LocationState.initial()) {
     on<LocationEvent>((event, emit) async {
       await event.when(
+        saveLocation: (inputCity) async {
+          await locationRepo.saveLocation(input: inputCity);
+          emit(state.copyWith(searchClick: true));
+        },
         currentLocation: () async {
           emit(LocationState.initial());
 

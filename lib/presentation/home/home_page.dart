@@ -12,11 +12,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<WeatherBloc>(
-      create: (context) => getIt<WeatherBloc>()
-        ..add(const WeatherEvent.weatherChanged(
-          latittude: 0.0,
-          longitude: 0.0,
-        )),
+      create: (context) {
+        return getIt<WeatherBloc>()..add(const WeatherEvent.weatherChanged());
+      },
       child: const HomeScreen(),
     );
   }

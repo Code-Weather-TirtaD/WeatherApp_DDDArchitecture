@@ -18,18 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LocationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(dynamic input) saveLocation,
     required TResult Function() currentLocation,
     required TResult Function(String input) searchLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(dynamic input)? saveLocation,
     TResult? Function()? currentLocation,
     TResult? Function(String input)? searchLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(dynamic input)? saveLocation,
     TResult Function()? currentLocation,
     TResult Function(String input)? searchLocation,
     required TResult orElse(),
@@ -37,18 +40,21 @@ mixin _$LocationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_saveLocation value) saveLocation,
     required TResult Function(_currentLocation value) currentLocation,
     required TResult Function(_searchLocation value) searchLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_saveLocation value)? saveLocation,
     TResult? Function(_currentLocation value)? currentLocation,
     TResult? Function(_searchLocation value)? searchLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_saveLocation value)? saveLocation,
     TResult Function(_currentLocation value)? currentLocation,
     TResult Function(_searchLocation value)? searchLocation,
     required TResult orElse(),
@@ -72,6 +78,143 @@ class _$LocationEventCopyWithImpl<$Res, $Val extends LocationEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_saveLocationCopyWith<$Res> {
+  factory _$$_saveLocationCopyWith(
+          _$_saveLocation value, $Res Function(_$_saveLocation) then) =
+      __$$_saveLocationCopyWithImpl<$Res>;
+  @useResult
+  $Res call({dynamic input});
+}
+
+/// @nodoc
+class __$$_saveLocationCopyWithImpl<$Res>
+    extends _$LocationEventCopyWithImpl<$Res, _$_saveLocation>
+    implements _$$_saveLocationCopyWith<$Res> {
+  __$$_saveLocationCopyWithImpl(
+      _$_saveLocation _value, $Res Function(_$_saveLocation) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? input = freezed,
+  }) {
+    return _then(_$_saveLocation(
+      freezed == input ? _value.input! : input,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_saveLocation implements _saveLocation {
+  const _$_saveLocation(this.input);
+
+  @override
+  final dynamic input;
+
+  @override
+  String toString() {
+    return 'LocationEvent.saveLocation(input: $input)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_saveLocation &&
+            const DeepCollectionEquality().equals(other.input, input));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(input));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_saveLocationCopyWith<_$_saveLocation> get copyWith =>
+      __$$_saveLocationCopyWithImpl<_$_saveLocation>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(dynamic input) saveLocation,
+    required TResult Function() currentLocation,
+    required TResult Function(String input) searchLocation,
+  }) {
+    return saveLocation(input);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(dynamic input)? saveLocation,
+    TResult? Function()? currentLocation,
+    TResult? Function(String input)? searchLocation,
+  }) {
+    return saveLocation?.call(input);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(dynamic input)? saveLocation,
+    TResult Function()? currentLocation,
+    TResult Function(String input)? searchLocation,
+    required TResult orElse(),
+  }) {
+    if (saveLocation != null) {
+      return saveLocation(input);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_saveLocation value) saveLocation,
+    required TResult Function(_currentLocation value) currentLocation,
+    required TResult Function(_searchLocation value) searchLocation,
+  }) {
+    return saveLocation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_saveLocation value)? saveLocation,
+    TResult? Function(_currentLocation value)? currentLocation,
+    TResult? Function(_searchLocation value)? searchLocation,
+  }) {
+    return saveLocation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_saveLocation value)? saveLocation,
+    TResult Function(_currentLocation value)? currentLocation,
+    TResult Function(_searchLocation value)? searchLocation,
+    required TResult orElse(),
+  }) {
+    if (saveLocation != null) {
+      return saveLocation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _saveLocation implements LocationEvent {
+  const factory _saveLocation(final dynamic input) = _$_saveLocation;
+
+  dynamic get input;
+  @JsonKey(ignore: true)
+  _$$_saveLocationCopyWith<_$_saveLocation> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -112,6 +255,7 @@ class _$_currentLocation implements _currentLocation {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(dynamic input) saveLocation,
     required TResult Function() currentLocation,
     required TResult Function(String input) searchLocation,
   }) {
@@ -121,6 +265,7 @@ class _$_currentLocation implements _currentLocation {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(dynamic input)? saveLocation,
     TResult? Function()? currentLocation,
     TResult? Function(String input)? searchLocation,
   }) {
@@ -130,6 +275,7 @@ class _$_currentLocation implements _currentLocation {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(dynamic input)? saveLocation,
     TResult Function()? currentLocation,
     TResult Function(String input)? searchLocation,
     required TResult orElse(),
@@ -143,6 +289,7 @@ class _$_currentLocation implements _currentLocation {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_saveLocation value) saveLocation,
     required TResult Function(_currentLocation value) currentLocation,
     required TResult Function(_searchLocation value) searchLocation,
   }) {
@@ -152,6 +299,7 @@ class _$_currentLocation implements _currentLocation {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_saveLocation value)? saveLocation,
     TResult? Function(_currentLocation value)? currentLocation,
     TResult? Function(_searchLocation value)? searchLocation,
   }) {
@@ -161,6 +309,7 @@ class _$_currentLocation implements _currentLocation {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_saveLocation value)? saveLocation,
     TResult Function(_currentLocation value)? currentLocation,
     TResult Function(_searchLocation value)? searchLocation,
     required TResult orElse(),
@@ -240,6 +389,7 @@ class _$_searchLocation implements _searchLocation {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(dynamic input) saveLocation,
     required TResult Function() currentLocation,
     required TResult Function(String input) searchLocation,
   }) {
@@ -249,6 +399,7 @@ class _$_searchLocation implements _searchLocation {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(dynamic input)? saveLocation,
     TResult? Function()? currentLocation,
     TResult? Function(String input)? searchLocation,
   }) {
@@ -258,6 +409,7 @@ class _$_searchLocation implements _searchLocation {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(dynamic input)? saveLocation,
     TResult Function()? currentLocation,
     TResult Function(String input)? searchLocation,
     required TResult orElse(),
@@ -271,6 +423,7 @@ class _$_searchLocation implements _searchLocation {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_saveLocation value) saveLocation,
     required TResult Function(_currentLocation value) currentLocation,
     required TResult Function(_searchLocation value) searchLocation,
   }) {
@@ -280,6 +433,7 @@ class _$_searchLocation implements _searchLocation {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_saveLocation value)? saveLocation,
     TResult? Function(_currentLocation value)? currentLocation,
     TResult? Function(_searchLocation value)? searchLocation,
   }) {
@@ -289,6 +443,7 @@ class _$_searchLocation implements _searchLocation {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_saveLocation value)? saveLocation,
     TResult Function(_currentLocation value)? currentLocation,
     TResult Function(_searchLocation value)? searchLocation,
     required TResult orElse(),
@@ -313,6 +468,7 @@ abstract class _searchLocation implements LocationEvent {
 /// @nodoc
 mixin _$LocationState {
   List<LocationModel> get location => throw _privateConstructorUsedError;
+  bool get searchClick => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LocationStateCopyWith<LocationState> get copyWith =>
@@ -325,7 +481,7 @@ abstract class $LocationStateCopyWith<$Res> {
           LocationState value, $Res Function(LocationState) then) =
       _$LocationStateCopyWithImpl<$Res, LocationState>;
   @useResult
-  $Res call({List<LocationModel> location});
+  $Res call({List<LocationModel> location, bool searchClick});
 }
 
 /// @nodoc
@@ -342,12 +498,17 @@ class _$LocationStateCopyWithImpl<$Res, $Val extends LocationState>
   @override
   $Res call({
     Object? location = null,
+    Object? searchClick = null,
   }) {
     return _then(_value.copyWith(
       location: null == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as List<LocationModel>,
+      searchClick: null == searchClick
+          ? _value.searchClick
+          : searchClick // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -360,7 +521,7 @@ abstract class _$$_LocationStateCopyWith<$Res>
       __$$_LocationStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<LocationModel> location});
+  $Res call({List<LocationModel> location, bool searchClick});
 }
 
 /// @nodoc
@@ -375,12 +536,17 @@ class __$$_LocationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? location = null,
+    Object? searchClick = null,
   }) {
     return _then(_$_LocationState(
       location: null == location
           ? _value._location
           : location // ignore: cast_nullable_to_non_nullable
               as List<LocationModel>,
+      searchClick: null == searchClick
+          ? _value.searchClick
+          : searchClick // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -388,7 +554,8 @@ class __$$_LocationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LocationState implements _LocationState {
-  _$_LocationState({required final List<LocationModel> location})
+  _$_LocationState(
+      {required final List<LocationModel> location, required this.searchClick})
       : _location = location;
 
   final List<LocationModel> _location;
@@ -400,8 +567,11 @@ class _$_LocationState implements _LocationState {
   }
 
   @override
+  final bool searchClick;
+
+  @override
   String toString() {
-    return 'LocationState(location: $location)';
+    return 'LocationState(location: $location, searchClick: $searchClick)';
   }
 
   @override
@@ -409,12 +579,14 @@ class _$_LocationState implements _LocationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LocationState &&
-            const DeepCollectionEquality().equals(other._location, _location));
+            const DeepCollectionEquality().equals(other._location, _location) &&
+            (identical(other.searchClick, searchClick) ||
+                other.searchClick == searchClick));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_location));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_location), searchClick);
 
   @JsonKey(ignore: true)
   @override
@@ -424,11 +596,14 @@ class _$_LocationState implements _LocationState {
 }
 
 abstract class _LocationState implements LocationState {
-  factory _LocationState({required final List<LocationModel> location}) =
-      _$_LocationState;
+  factory _LocationState(
+      {required final List<LocationModel> location,
+      required final bool searchClick}) = _$_LocationState;
 
   @override
   List<LocationModel> get location;
+  @override
+  bool get searchClick;
   @override
   @JsonKey(ignore: true)
   _$$_LocationStateCopyWith<_$_LocationState> get copyWith =>

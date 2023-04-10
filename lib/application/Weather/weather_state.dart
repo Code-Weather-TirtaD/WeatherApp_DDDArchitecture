@@ -4,12 +4,19 @@ part of 'weather_bloc.dart';
 class WeatherState with _$WeatherState {
   factory WeatherState({
     required bool isLoading,
+    required LocationModel locationData,
     required WeatherModel weatherData,
     required List<WeatherModel> forecastData,
   }) = _WeatherState;
 
   factory WeatherState.initial() => WeatherState(
-        isLoading: false,
+        isLoading: true,
+        locationData: LocationModel(
+          city: '',
+          stateCity: '',
+          latitude: 0.0,
+          longitude: 0.0,
+        ),
         weatherData: WeatherModel(
             weather: '',
             weatherDescription: '',

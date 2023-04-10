@@ -1,17 +1,17 @@
-import 'package:code_id_network/code_id_network.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:code_id_network/code_id_network.dart';
+import 'package:code_id_storage/code_id_storage.dart';
 import 'package:weatherapp_ddd/domain/location/i_location_repo.dart';
 import 'package:weatherapp_ddd/domain/weather/weather_failure.dart';
-
-import 'location_model.dart';
+import 'package:weatherapp_ddd/infrastructure/location/location_model.dart';
 
 @LazySingleton(as: ILocationRepo)
 class LocationRepo extends ILocationRepo {
   LocationRepo(this.network);
   final INetworkService network;
-  // IStorage storage = Storage;
+  final IStorage store = Storage;
 
   @override
   Future<Position> locationService() async {
@@ -40,6 +40,23 @@ class LocationRepo extends ILocationRepo {
         desiredAccuracy: LocationAccuracy.high);
 
     return pos;
+  }
+
+  @override
+  Future<void> saveLocation({required input}) async {
+    LocationModel inputLoc = input;
+
+    await store.openBox('location');
+    await store.putData(data: {
+      'locationData': {
+        'city': inputLoc.city.toString(),
+        'stateCity': inputLoc.stateCity.toString(),
+        'latitude': inputLoc.latitude,
+        'longitude': inputLoc.longitude,
+      }
+    });
+
+    return;
   }
 
   @override
