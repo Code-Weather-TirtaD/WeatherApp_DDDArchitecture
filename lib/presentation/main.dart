@@ -6,7 +6,7 @@ import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 
 void main() async {
   await Storage.init();
-  await configureEnvieonment(Environment.dev);
+  await configureEnvironment(Environment.dev);
   runApp(const MyApp());
 }
 
