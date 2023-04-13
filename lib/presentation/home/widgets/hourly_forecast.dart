@@ -7,11 +7,13 @@ class HourlyForecast extends StatelessWidget {
     Key? key,
     required this.size,
     required this.iconUrl,
+    required this.temperatureUnit,
     required this.data,
   }) : super(key: key);
 
   final Size size;
   final String iconUrl;
+  final String temperatureUnit;
   final List<WeatherModel> data;
 
   @override
@@ -24,8 +26,8 @@ class HourlyForecast extends StatelessWidget {
         itemCount: data.length < 15 ? data.length : 15,
         itemBuilder: (context, index) {
           var icon = '$iconUrl${data[index].weatherIcon}@2x.png';
-          var timestamp =
-              DateTime.fromMillisecondsSinceEpoch(data[index].dt * 1000);
+          var timestamp = DateTime.fromMillisecondsSinceEpoch(
+              (data[index].dt).toInt() * 1000);
           var date = DateFormat.MMMd('en_US').format(timestamp);
           var time = DateFormat.Hm().format(timestamp);
 
@@ -37,7 +39,8 @@ class HourlyForecast extends StatelessWidget {
                 children: [
                   Text(time == '01:00' ? date : time),
                   ImageIcon(NetworkImage(icon), size: 50),
-                  Text("${data[index].temparatureMax.round()} \u2103"),
+                  Text(
+                      "${data[index].temperatureFeel.toStringAsFixed(1)} $temperatureUnit"),
                 ],
               ),
             ),

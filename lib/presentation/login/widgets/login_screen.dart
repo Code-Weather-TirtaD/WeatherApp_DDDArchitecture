@@ -31,80 +31,101 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           );
         }),
+        buildWhen: (previous, current) {
+          var notLogIn = false;
+
+          current.options.match(
+            () => null,
+            (isLoggedIn) => {
+              isLoggedIn.fold(
+                (l) => notLogIn = true,
+                (r) => notLogIn = false,
+              )
+            },
+          );
+
+          return notLogIn;
+        },
         builder: (context, state) {
-          return SizedBox(
-            width: size.width,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'PLEASE LOGIN',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  const Text('Username: '),
-                  TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: (value) => context
-                        .read<LoginBloc>()
-                        .add(LoginEvent.usernameChanged(input: value)),
-                    validator: (value) => state.username.value.fold((failure) {
-                      return failure.maybeMap(
-                        invalidEmail: (_) {
-                          return 'must be an email address';
-                        },
-                        orElse: () => null,
-                      );
-                    }, (r) => null),
-                  ),
-                  const SizedBox(height: 15),
-                  const Text('Password: '),
-                  TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: (value) => context
-                        .read<LoginBloc>()
-                        .add(LoginEvent.passwordChanged(input: value)),
-                    validator: (value) => state.password.value.fold((failure) {
-                      return failure.maybeMap(
-                        lengthToShort: (_) {
-                          return 'must be 6 digits or higher';
-                        },
-                        exceedingLength: (_) {
-                          return 'must lesser than or equal 10 digits';
-                        },
-                        orElse: () => null,
-                      );
-                    }, (r) => null),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.only(top: 20),
-                    child: MaterialButton(
-                      minWidth: size.width * 0.5,
-                      color: Colors.cyanAccent,
-                      onPressed: state.isShowError
-                          ? null
-                          : () {
-                              context
-                                  .read<LoginBloc>()
-                                  .add(const LoginEvent.login());
-                            },
-                      child: const Text(
-                        'LOGIN',
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return SizedBox(
+              width: size.width,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'PLEASE LOGIN',
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal,
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 30),
+                    const Text('Username: '),
+                    TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onChanged: (value) => context
+                          .read<LoginBloc>()
+                          .add(LoginEvent.usernameChanged(input: value)),
+                      validator: (value) =>
+                          state.username.value.fold((failure) {
+                        return failure.maybeMap(
+                          invalidEmail: (_) {
+                            return 'must be an email address';
+                          },
+                          orElse: () => null,
+                        );
+                      }, (r) => null),
+                    ),
+                    const SizedBox(height: 15),
+                    const Text('Password: '),
+                    TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onChanged: (value) => context
+                          .read<LoginBloc>()
+                          .add(LoginEvent.passwordChanged(input: value)),
+                      validator: (value) =>
+                          state.password.value.fold((failure) {
+                        return failure.maybeMap(
+                          lengthToShort: (_) {
+                            return 'must be 6 digits or higher';
+                          },
+                          exceedingLength: (_) {
+                            return 'must lesser than or equal 10 digits';
+                          },
+                          orElse: () => null,
+                        );
+                      }, (r) => null),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(top: 20),
+                      child: MaterialButton(
+                        minWidth: size.width * 0.5,
+                        color: Colors.cyanAccent,
+                        onPressed: state.isShowError
+                            ? null
+                            : () {
+                                context
+                                    .read<LoginBloc>()
+                                    .add(const LoginEvent.login());
+                              },
+                        child: const Text(
+                          'LOGIN',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          }
         },
       ),
     );

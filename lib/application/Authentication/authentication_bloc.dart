@@ -12,7 +12,7 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final IAuthenticationRepo authRepo;
 
-  AuthenticationBloc(this.authRepo) : super(const _Initial()) {
+  AuthenticationBloc(this.authRepo) : super(AuthenticationState.initial()) {
     on<AuthenticationEvent>((event, emit) async {
       await event.when(
         started: () async {},

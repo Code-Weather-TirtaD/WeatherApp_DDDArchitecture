@@ -6,10 +6,12 @@ class DailyForecast extends StatelessWidget {
   const DailyForecast({
     Key? key,
     required this.iconUrl,
+    required this.temperatureUnit,
     required this.data,
   }) : super(key: key);
 
   final String iconUrl;
+  final String temperatureUnit;
   final List<WeatherModel> data;
 
   @override
@@ -20,8 +22,8 @@ class DailyForecast extends StatelessWidget {
       itemCount: data.length,
       itemBuilder: (context, index) {
         var icon = '$iconUrl${data[index].weatherIcon}@2x.png';
-        var timestamp =
-            DateTime.fromMillisecondsSinceEpoch(data[index].dt * 1000);
+        var timestamp = DateTime.fromMillisecondsSinceEpoch(
+            (data[index].dt).toInt() * 1000);
         var date = DateFormat('EEE MMM d', 'en_US').format(timestamp);
         var time = DateFormat.jm().format(timestamp);
 
@@ -31,7 +33,7 @@ class DailyForecast extends StatelessWidget {
             shape: const Border(top: BorderSide()),
             leading: Text(date),
             title: Text(
-              "${data[index].temparatureMax} / ${data[index].temperatureMin} \u2103",
+              "${data[index].temparatureMax.toStringAsFixed(1)} / ${data[index].temperatureMin.toStringAsFixed(1)} $temperatureUnit",
               textAlign: TextAlign.end,
             ),
             trailing: ImageIcon(NetworkImage(icon)),

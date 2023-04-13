@@ -68,9 +68,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     onTap: () async {
                       context.read<LocationBloc>().add(
                           LocationEvent.saveLocation(state.location[index]));
-
-                      // pindahin ke listener
-                      // router.replace(const HomeRoute());
                     },
                   );
                 });

@@ -20,6 +20,12 @@ abstract class _$AppRouters extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    LoginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LoginPage(),
+      );
+    },
     SearchRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -32,10 +38,10 @@ abstract class _$AppRouters extends RootStackRouter {
         child: const SettingPage(),
       );
     },
-    LoginRoute.name: (routeData) {
+    CustomizeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const LoginPage(),
+        child: const CustomizePage(),
       );
     },
   };
@@ -51,6 +57,20 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LoginPage]
+class LoginRoute extends PageRouteInfo<void> {
+  const LoginRoute({List<PageRouteInfo>? children})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -84,15 +104,15 @@ class SettingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [LoginPage]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute({List<PageRouteInfo>? children})
+/// [CustomizePage]
+class CustomizeRoute extends PageRouteInfo<void> {
+  const CustomizeRoute({List<PageRouteInfo>? children})
       : super(
-          LoginRoute.name,
+          CustomizeRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'LoginRoute';
+  static const String name = 'CustomizeRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

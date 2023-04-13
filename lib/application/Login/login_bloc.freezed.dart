@@ -606,6 +606,7 @@ abstract class _LoadAuth implements LoginEvent {
 
 /// @nodoc
 mixin _$LoginState {
+  bool get isLoading => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get isShowError => throw _privateConstructorUsedError;
   LoginUsername get username => throw _privateConstructorUsedError;
@@ -625,7 +626,8 @@ abstract class $LoginStateCopyWith<$Res> {
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
   $Res call(
-      {bool isSubmitting,
+      {bool isLoading,
+      bool isSubmitting,
       bool isShowError,
       LoginUsername username,
       LoginPassword password,
@@ -645,6 +647,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? isSubmitting = null,
     Object? isShowError = null,
     Object? username = null,
@@ -652,6 +655,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? options = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -685,7 +692,8 @@ abstract class _$$_LoginStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isSubmitting,
+      {bool isLoading,
+      bool isSubmitting,
       bool isShowError,
       LoginUsername username,
       LoginPassword password,
@@ -703,6 +711,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? isSubmitting = null,
     Object? isShowError = null,
     Object? username = null,
@@ -710,6 +719,10 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? options = null,
   }) {
     return _then(_$_LoginState(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -738,12 +751,15 @@ class __$$_LoginStateCopyWithImpl<$Res>
 
 class _$_LoginState implements _LoginState {
   _$_LoginState(
-      {required this.isSubmitting,
+      {required this.isLoading,
+      required this.isSubmitting,
       required this.isShowError,
       required this.username,
       required this.password,
       required this.options});
 
+  @override
+  final bool isLoading;
   @override
   final bool isSubmitting;
   @override
@@ -757,7 +773,7 @@ class _$_LoginState implements _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(isSubmitting: $isSubmitting, isShowError: $isShowError, username: $username, password: $password, options: $options)';
+    return 'LoginState(isLoading: $isLoading, isSubmitting: $isSubmitting, isShowError: $isShowError, username: $username, password: $password, options: $options)';
   }
 
   @override
@@ -765,6 +781,8 @@ class _$_LoginState implements _LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.isShowError, isShowError) ||
@@ -777,8 +795,8 @@ class _$_LoginState implements _LoginState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isSubmitting, isShowError, username, password, options);
+  int get hashCode => Object.hash(runtimeType, isLoading, isSubmitting,
+      isShowError, username, password, options);
 
   @JsonKey(ignore: true)
   @override
@@ -789,13 +807,16 @@ class _$_LoginState implements _LoginState {
 
 abstract class _LoginState implements LoginState {
   factory _LoginState(
-          {required final bool isSubmitting,
+          {required final bool isLoading,
+          required final bool isSubmitting,
           required final bool isShowError,
           required final LoginUsername username,
           required final LoginPassword password,
           required final Option<Either<NetworkError, LoginModel>> options}) =
       _$_LoginState;
 
+  @override
+  bool get isLoading;
   @override
   bool get isSubmitting;
   @override

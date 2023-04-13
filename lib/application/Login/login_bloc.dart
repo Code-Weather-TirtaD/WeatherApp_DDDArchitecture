@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:code_id_network/code_id_network.dart';
@@ -50,8 +51,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         },
         loadAuth: () async {
           final isLoggedIn = await loginRepo.loadAuth();
-          emit(state.copyWith(
-              isSubmitting: false, options: optionOf(isLoggedIn)));
+          debugPrint(state.username.username);
+
+          emit(state.copyWith(isLoading: false, options: optionOf(isLoggedIn)));
         },
       );
     });

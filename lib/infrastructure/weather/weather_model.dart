@@ -16,11 +16,11 @@ abstract class WeatherModel with _$WeatherModel {
     required num temperatureMin,
     required num temparatureMax,
     required int humidity,
-    required int pressure,
+    required num pressure,
     required int visibility,
     required num windSpeed,
     required int windDirection,
-    required int dt,
+    required num dt,
   }) = _WeatherModel;
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) =>

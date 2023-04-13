@@ -4,7 +4,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherapp_ddd/presentation/injection.dart';
 import 'package:weatherapp_ddd/application/Login/login_bloc.dart';
-import 'package:weatherapp_ddd/application/authentication/authentication_bloc.dart';
 import 'package:weatherapp_ddd/presentation/login/widgets/login_screen.dart';
 
 @RoutePage()
@@ -13,16 +12,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthenticationBloc>(
-          create: (context) => getIt<AuthenticationBloc>(),
-        ),
-        BlocProvider<LoginBloc>(
-          create: (context) =>
-              getIt<LoginBloc>()..add(const LoginEvent.loadAuth()),
-        ),
-      ],
+    return BlocProvider<LoginBloc>(
+      create: (context) => getIt<LoginBloc>()..add(const LoginEvent.loadAuth()),
       child: const LoginScreen(),
     );
   }

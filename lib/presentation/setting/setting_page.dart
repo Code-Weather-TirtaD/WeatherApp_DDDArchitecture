@@ -1,24 +1,18 @@
-import 'package:auto_route/annotations.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:weatherapp_ddd/presentation/injection.dart';
+import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 
 @RoutePage()
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const SettingScreen();
-  }
-}
-
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
   final String creditDetail =
       "All data in this app is provided by OpenWeather API\u2122. OpenWeather aggregates and processes meteorological data from tens of thousand weather stations, on-ground radars and satelites to bring accurate and actionable weather data for any location worldwide.";
 
   @override
   Widget build(BuildContext context) {
+    final router = getIt<AppRouters>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -30,9 +24,7 @@ class SettingScreen extends StatelessWidget {
           trailing: const Icon(Icons.arrow_forward_ios_rounded),
           shape: const UnderlineInputBorder(),
           onTap: () {
-            if (kDebugMode) {
-              print('different weather');
-            }
+            debugPrint('Feedback Screen');
           },
         ),
         ListTile(
@@ -40,9 +32,8 @@ class SettingScreen extends StatelessWidget {
           trailing: const Icon(Icons.arrow_forward_ios_rounded),
           shape: const UnderlineInputBorder(),
           onTap: () {
-            if (kDebugMode) {
-              print('units');
-            }
+            debugPrint('Customize Screen');
+            router.push(const CustomizeRoute());
           },
         ),
         const ListTile(

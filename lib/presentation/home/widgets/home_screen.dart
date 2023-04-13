@@ -16,6 +16,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   get router => getIt<AppRouters>();
 
+  final List<String> tempUnits = ['\u2103', '\u2109'];
+  final List<String> wsUnits = ['m/s', 'km/h', 'mph'];
+  final List<String> pressureUnits = ['hPa', 'inHg'];
+  final List<String> distanceUnits = ['km', 'mi'];
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<WeatherBloc>().add(const WeatherEvent.weatherChanged());
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -43,6 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state) {
+          var tempIndex = state.selectedTemp.unitActive.indexOf(true);
+          var wsIndex = state.selectedWindSpeed.unitActive.indexOf(true);
+          var pressure = state.selectedPressure.unitActive.indexOf(true);
+          var distance = state.selectedDistance.unitActive.indexOf(true);
+
           if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());
           } else {
@@ -72,12 +88,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           Text(
-                            "${state.weatherData.temperature.round()} \u2103",
+                            "${state.weatherData.temperature.round()} ${tempUnits[tempIndex]}",
                             style: const TextStyle(
                                 fontSize: 70, fontWeight: FontWeight.w200),
                           ),
                           Text(
-                            "Temperature Feel: ${state.weatherData.temperatureFeel.round()} \u2103",
+                            "Temperature Feel: ${state.weatherData.temperatureFeel.round()} ${tempUnits[tempIndex]}",
                           ),
                         ]),
                   ),
@@ -97,23 +113,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                 crossAxisSpacing: 2,
                                 mainAxisSpacing: 2),
                         children: [
-                          Text("Wind: ${state.weatherData.windSpeed} m/s"),
+                          Text(
+                              "Wind: ${state.weatherData.windSpeed.toStringAsFixed(2)} ${wsUnits[wsIndex]}"),
                           Text("Humidity: ${state.weatherData.humidity} %"),
                           Text(
-                              "Min Temp: ${state.weatherData.temperatureMin.round()} \u2103"),
-                          Text("Pressure: ${state.weatherData.pressure} hPa"),
+                              "Min Temp: ${state.weatherData.temperatureMin.round()} ${tempUnits[tempIndex]}"),
                           Text(
-                              "Visibility: ${(state.weatherData.visibility / 1000)} KM"),
+                              "Pressure: ${state.weatherData.pressure.toStringAsFixed(1)} ${pressureUnits[pressure]}"),
                           Text(
-                              "Max Temp: ${state.weatherData.temparatureMax.round()} \u2103"),
+                              "Visibility: ${(state.weatherData.visibility / 1000).toStringAsFixed(1)} ${distanceUnits[distance]}"),
+                          Text(
+                              "Max Temp: ${state.weatherData.temparatureMax.round()} ${tempUnits[tempIndex]}"),
                         ],
                       ),
                     ),
                   ),
                   // Forecast Widgets
                   HourlyForecast(
-                      size: size, iconUrl: iconUrl, data: state.forecastData),
-                  DailyForecast(iconUrl: iconUrl, data: state.forecastData)
+                      size: size,
+                      iconUrl: iconUrl,
+                      temperatureUnit: tempUnits[tempIndex],
+                      data: state.forecastData),
+                  DailyForecast(
+                      iconUrl: iconUrl,
+                      temperatureUnit: tempUnits[tempIndex],
+                      data: state.forecastData)
                 ],
               ),
             );

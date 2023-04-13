@@ -42,6 +42,7 @@ class LoginRepo extends ILoginRepo {
 
   @override
   Future<void> closeStorage() async {
+    await store.clear();
     await store.close();
   }
 }

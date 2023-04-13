@@ -28,11 +28,11 @@ mixin _$WeatherModel {
   num get temperatureMin => throw _privateConstructorUsedError;
   num get temparatureMax => throw _privateConstructorUsedError;
   int get humidity => throw _privateConstructorUsedError;
-  int get pressure => throw _privateConstructorUsedError;
+  num get pressure => throw _privateConstructorUsedError;
   int get visibility => throw _privateConstructorUsedError;
   num get windSpeed => throw _privateConstructorUsedError;
   int get windDirection => throw _privateConstructorUsedError;
-  int get dt => throw _privateConstructorUsedError;
+  num get dt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,11 +55,11 @@ abstract class $WeatherModelCopyWith<$Res> {
       num temperatureMin,
       num temparatureMax,
       int humidity,
-      int pressure,
+      num pressure,
       int visibility,
       num windSpeed,
       int windDirection,
-      int dt});
+      num dt});
 }
 
 /// @nodoc
@@ -125,7 +125,7 @@ class _$WeatherModelCopyWithImpl<$Res, $Val extends WeatherModel>
       pressure: null == pressure
           ? _value.pressure
           : pressure // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       visibility: null == visibility
           ? _value.visibility
           : visibility // ignore: cast_nullable_to_non_nullable
@@ -141,7 +141,7 @@ class _$WeatherModelCopyWithImpl<$Res, $Val extends WeatherModel>
       dt: null == dt
           ? _value.dt
           : dt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
     ) as $Val);
   }
 }
@@ -163,11 +163,11 @@ abstract class _$$_WeatherModelCopyWith<$Res>
       num temperatureMin,
       num temparatureMax,
       int humidity,
-      int pressure,
+      num pressure,
       int visibility,
       num windSpeed,
       int windDirection,
-      int dt});
+      num dt});
 }
 
 /// @nodoc
@@ -231,7 +231,7 @@ class __$$_WeatherModelCopyWithImpl<$Res>
       pressure: null == pressure
           ? _value.pressure
           : pressure // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       visibility: null == visibility
           ? _value.visibility
           : visibility // ignore: cast_nullable_to_non_nullable
@@ -247,7 +247,7 @@ class __$$_WeatherModelCopyWithImpl<$Res>
       dt: null == dt
           ? _value.dt
           : dt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
     ));
   }
 }
@@ -291,7 +291,7 @@ class _$_WeatherModel extends _WeatherModel {
   @override
   final int humidity;
   @override
-  final int pressure;
+  final num pressure;
   @override
   final int visibility;
   @override
@@ -299,7 +299,7 @@ class _$_WeatherModel extends _WeatherModel {
   @override
   final int windDirection;
   @override
-  final int dt;
+  final num dt;
 
   @override
   String toString() {
@@ -379,11 +379,11 @@ abstract class _WeatherModel extends WeatherModel {
       required final num temperatureMin,
       required final num temparatureMax,
       required final int humidity,
-      required final int pressure,
+      required final num pressure,
       required final int visibility,
       required final num windSpeed,
       required final int windDirection,
-      required final int dt}) = _$_WeatherModel;
+      required final num dt}) = _$_WeatherModel;
   _WeatherModel._() : super._();
 
   factory _WeatherModel.fromJson(Map<String, dynamic> json) =
@@ -406,7 +406,7 @@ abstract class _WeatherModel extends WeatherModel {
   @override
   int get humidity;
   @override
-  int get pressure;
+  num get pressure;
   @override
   int get visibility;
   @override
@@ -414,7 +414,7 @@ abstract class _WeatherModel extends WeatherModel {
   @override
   int get windDirection;
   @override
-  int get dt;
+  num get dt;
   @override
   @JsonKey(ignore: true)
   _$$_WeatherModelCopyWith<_$_WeatherModel> get copyWith =>
