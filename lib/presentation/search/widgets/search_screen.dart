@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weatherapp_ddd/presentation/injection.dart';
@@ -43,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: BlocConsumer<LocationBloc, LocationState>(
         listener: (context, state) {
           if (state.searchClick) {
-            router.replace(const HomeRoute());
+            context.router.pop();
           }
         },
         builder: (context, state) {

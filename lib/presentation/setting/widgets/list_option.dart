@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weatherapp_ddd/application/Weather/weather_bloc.dart';
 
 class ListOption extends StatelessWidget {
   const ListOption({
@@ -9,11 +7,13 @@ class ListOption extends StatelessWidget {
     required this.optionTitle,
     required this.selection,
     required this.selectionText,
+    required this.action,
   });
   final num option;
   final String optionTitle;
   final List<Widget> selectionText;
   final List<bool> selection;
+  final Function action;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,7 @@ class ListOption extends StatelessWidget {
               minWidth: 80.0,
             ),
             onPressed: (index) {
-              context
-                  .read<WeatherBloc>()
-                  .add(WeatherEvent.unitChanged(index, option));
+              action(index);
             },
             children: selectionText,
           ),

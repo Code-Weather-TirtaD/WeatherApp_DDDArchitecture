@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weatherapp_ddd/application/Setting/setting_bloc.dart';
 import 'package:weatherapp_ddd/presentation/injection.dart';
 import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 import 'package:weatherapp_ddd/application/Weather/weather_bloc.dart';
@@ -54,10 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       body: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state) {
-          var tempIndex = state.selectedTemp.unitActive.indexOf(true);
-          var wsIndex = state.selectedWindSpeed.unitActive.indexOf(true);
-          var pressure = state.selectedPressure.unitActive.indexOf(true);
-          var distance = state.selectedDistance.unitActive.indexOf(true);
+          var tempIndex, wsIndex, pressure, distance;
+          context.select((SettingBloc setBloc) {
+            tempIndex = setBloc.state.selectedTemp.unitActive.indexOf(true);
+            wsIndex = setBloc.state.selectedWindSpeed.unitActive.indexOf(true);
+            pressure = setBloc.state.selectedPressure.unitActive.indexOf(true);
+            distance = setBloc.state.selectedDistance.unitActive.indexOf(true);
+          });
 
           if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());

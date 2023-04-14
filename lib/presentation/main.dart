@@ -5,6 +5,7 @@ import 'package:code_id_storage/code_id_storage.dart';
 import 'package:weatherapp_ddd/presentation/injection.dart';
 import 'package:weatherapp_ddd/presentation/routers/app_routers.dart';
 import 'package:weatherapp_ddd/application/Weather/weather_bloc.dart';
+import 'package:weatherapp_ddd/application/Setting/setting_bloc.dart';
 
 void main() async {
   await Storage.init();
@@ -19,8 +20,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appRouter = getIt<AppRouters>();
 
-    return BlocProvider(
-      create: (context) => getIt<WeatherBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<WeatherBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<SettingBloc>(),
+        ),
+      ],
       child: MaterialApp.router(
         routerConfig: appRouter.config(),
       ),

@@ -20,21 +20,24 @@ mixin _$WeatherEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() weatherChanged,
-    required TResult Function(int input, num option) unitChanged,
+    required TResult Function(WeatherModel input, List<WeatherModel> option)
+        unitChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? weatherChanged,
-    TResult? Function(int input, num option)? unitChanged,
+    TResult? Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? weatherChanged,
-    TResult Function(int input, num option)? unitChanged,
+    TResult Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +122,8 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() weatherChanged,
-    required TResult Function(int input, num option) unitChanged,
+    required TResult Function(WeatherModel input, List<WeatherModel> option)
+        unitChanged,
   }) {
     return started();
   }
@@ -129,7 +133,8 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? weatherChanged,
-    TResult? Function(int input, num option)? unitChanged,
+    TResult? Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
   }) {
     return started?.call();
   }
@@ -139,7 +144,8 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? weatherChanged,
-    TResult Function(int input, num option)? unitChanged,
+    TResult Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -227,7 +233,8 @@ class _$_weatherChanged implements _weatherChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() weatherChanged,
-    required TResult Function(int input, num option) unitChanged,
+    required TResult Function(WeatherModel input, List<WeatherModel> option)
+        unitChanged,
   }) {
     return weatherChanged();
   }
@@ -237,7 +244,8 @@ class _$_weatherChanged implements _weatherChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? weatherChanged,
-    TResult? Function(int input, num option)? unitChanged,
+    TResult? Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
   }) {
     return weatherChanged?.call();
   }
@@ -247,7 +255,8 @@ class _$_weatherChanged implements _weatherChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? weatherChanged,
-    TResult Function(int input, num option)? unitChanged,
+    TResult Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
     required TResult orElse(),
   }) {
     if (weatherChanged != null) {
@@ -301,7 +310,9 @@ abstract class _$$_unitChangedCopyWith<$Res> {
           _$_unitChanged value, $Res Function(_$_unitChanged) then) =
       __$$_unitChangedCopyWithImpl<$Res>;
   @useResult
-  $Res call({int input, num option});
+  $Res call({WeatherModel input, List<WeatherModel> option});
+
+  $WeatherModelCopyWith<$Res> get input;
 }
 
 /// @nodoc
@@ -322,24 +333,38 @@ class __$$_unitChangedCopyWithImpl<$Res>
       null == input
           ? _value.input
           : input // ignore: cast_nullable_to_non_nullable
-              as int,
+              as WeatherModel,
       null == option
-          ? _value.option
+          ? _value._option
           : option // ignore: cast_nullable_to_non_nullable
-              as num,
+              as List<WeatherModel>,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WeatherModelCopyWith<$Res> get input {
+    return $WeatherModelCopyWith<$Res>(_value.input, (value) {
+      return _then(_value.copyWith(input: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_unitChanged implements _unitChanged {
-  const _$_unitChanged(this.input, this.option);
+  const _$_unitChanged(this.input, final List<WeatherModel> option)
+      : _option = option;
 
   @override
-  final int input;
+  final WeatherModel input;
+  final List<WeatherModel> _option;
   @override
-  final num option;
+  List<WeatherModel> get option {
+    if (_option is EqualUnmodifiableListView) return _option;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_option);
+  }
 
   @override
   String toString() {
@@ -352,11 +377,12 @@ class _$_unitChanged implements _unitChanged {
         (other.runtimeType == runtimeType &&
             other is _$_unitChanged &&
             (identical(other.input, input) || other.input == input) &&
-            (identical(other.option, option) || other.option == option));
+            const DeepCollectionEquality().equals(other._option, _option));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, input, option);
+  int get hashCode => Object.hash(
+      runtimeType, input, const DeepCollectionEquality().hash(_option));
 
   @JsonKey(ignore: true)
   @override
@@ -369,7 +395,8 @@ class _$_unitChanged implements _unitChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() weatherChanged,
-    required TResult Function(int input, num option) unitChanged,
+    required TResult Function(WeatherModel input, List<WeatherModel> option)
+        unitChanged,
   }) {
     return unitChanged(input, option);
   }
@@ -379,7 +406,8 @@ class _$_unitChanged implements _unitChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? weatherChanged,
-    TResult? Function(int input, num option)? unitChanged,
+    TResult? Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
   }) {
     return unitChanged?.call(input, option);
   }
@@ -389,7 +417,8 @@ class _$_unitChanged implements _unitChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? weatherChanged,
-    TResult Function(int input, num option)? unitChanged,
+    TResult Function(WeatherModel input, List<WeatherModel> option)?
+        unitChanged,
     required TResult orElse(),
   }) {
     if (unitChanged != null) {
@@ -434,11 +463,12 @@ class _$_unitChanged implements _unitChanged {
 }
 
 abstract class _unitChanged implements WeatherEvent {
-  const factory _unitChanged(final int input, final num option) =
+  const factory _unitChanged(
+          final WeatherModel input, final List<WeatherModel> option) =
       _$_unitChanged;
 
-  int get input;
-  num get option;
+  WeatherModel get input;
+  List<WeatherModel> get option;
   @JsonKey(ignore: true)
   _$$_unitChangedCopyWith<_$_unitChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -449,12 +479,7 @@ mixin _$WeatherState {
   bool get isLoading => throw _privateConstructorUsedError;
   LocationModel get locationData => throw _privateConstructorUsedError;
   WeatherModel get weatherData => throw _privateConstructorUsedError;
-  List<WeatherModel> get forecastData =>
-      throw _privateConstructorUsedError; // Option
-  SelectUnit get selectedTemp => throw _privateConstructorUsedError;
-  SelectUnit get selectedWindSpeed => throw _privateConstructorUsedError;
-  SelectUnit get selectedPressure => throw _privateConstructorUsedError;
-  SelectUnit get selectedDistance => throw _privateConstructorUsedError;
+  List<WeatherModel> get forecastData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WeatherStateCopyWith<WeatherState> get copyWith =>
@@ -471,11 +496,7 @@ abstract class $WeatherStateCopyWith<$Res> {
       {bool isLoading,
       LocationModel locationData,
       WeatherModel weatherData,
-      List<WeatherModel> forecastData,
-      SelectUnit selectedTemp,
-      SelectUnit selectedWindSpeed,
-      SelectUnit selectedPressure,
-      SelectUnit selectedDistance});
+      List<WeatherModel> forecastData});
 
   $LocationModelCopyWith<$Res> get locationData;
   $WeatherModelCopyWith<$Res> get weatherData;
@@ -498,10 +519,6 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
     Object? locationData = null,
     Object? weatherData = null,
     Object? forecastData = null,
-    Object? selectedTemp = null,
-    Object? selectedWindSpeed = null,
-    Object? selectedPressure = null,
-    Object? selectedDistance = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -520,22 +537,6 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
           ? _value.forecastData
           : forecastData // ignore: cast_nullable_to_non_nullable
               as List<WeatherModel>,
-      selectedTemp: null == selectedTemp
-          ? _value.selectedTemp
-          : selectedTemp // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
-      selectedWindSpeed: null == selectedWindSpeed
-          ? _value.selectedWindSpeed
-          : selectedWindSpeed // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
-      selectedPressure: null == selectedPressure
-          ? _value.selectedPressure
-          : selectedPressure // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
-      selectedDistance: null == selectedDistance
-          ? _value.selectedDistance
-          : selectedDistance // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
     ) as $Val);
   }
 
@@ -568,11 +569,7 @@ abstract class _$$_WeatherStateCopyWith<$Res>
       {bool isLoading,
       LocationModel locationData,
       WeatherModel weatherData,
-      List<WeatherModel> forecastData,
-      SelectUnit selectedTemp,
-      SelectUnit selectedWindSpeed,
-      SelectUnit selectedPressure,
-      SelectUnit selectedDistance});
+      List<WeatherModel> forecastData});
 
   @override
   $LocationModelCopyWith<$Res> get locationData;
@@ -595,10 +592,6 @@ class __$$_WeatherStateCopyWithImpl<$Res>
     Object? locationData = null,
     Object? weatherData = null,
     Object? forecastData = null,
-    Object? selectedTemp = null,
-    Object? selectedWindSpeed = null,
-    Object? selectedPressure = null,
-    Object? selectedDistance = null,
   }) {
     return _then(_$_WeatherState(
       isLoading: null == isLoading
@@ -617,22 +610,6 @@ class __$$_WeatherStateCopyWithImpl<$Res>
           ? _value._forecastData
           : forecastData // ignore: cast_nullable_to_non_nullable
               as List<WeatherModel>,
-      selectedTemp: null == selectedTemp
-          ? _value.selectedTemp
-          : selectedTemp // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
-      selectedWindSpeed: null == selectedWindSpeed
-          ? _value.selectedWindSpeed
-          : selectedWindSpeed // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
-      selectedPressure: null == selectedPressure
-          ? _value.selectedPressure
-          : selectedPressure // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
-      selectedDistance: null == selectedDistance
-          ? _value.selectedDistance
-          : selectedDistance // ignore: cast_nullable_to_non_nullable
-              as SelectUnit,
     ));
   }
 }
@@ -644,11 +621,7 @@ class _$_WeatherState implements _WeatherState {
       {required this.isLoading,
       required this.locationData,
       required this.weatherData,
-      required final List<WeatherModel> forecastData,
-      required this.selectedTemp,
-      required this.selectedWindSpeed,
-      required this.selectedPressure,
-      required this.selectedDistance})
+      required final List<WeatherModel> forecastData})
       : _forecastData = forecastData;
 
   @override
@@ -665,19 +638,9 @@ class _$_WeatherState implements _WeatherState {
     return EqualUnmodifiableListView(_forecastData);
   }
 
-// Option
-  @override
-  final SelectUnit selectedTemp;
-  @override
-  final SelectUnit selectedWindSpeed;
-  @override
-  final SelectUnit selectedPressure;
-  @override
-  final SelectUnit selectedDistance;
-
   @override
   String toString() {
-    return 'WeatherState(isLoading: $isLoading, locationData: $locationData, weatherData: $weatherData, forecastData: $forecastData, selectedTemp: $selectedTemp, selectedWindSpeed: $selectedWindSpeed, selectedPressure: $selectedPressure, selectedDistance: $selectedDistance)';
+    return 'WeatherState(isLoading: $isLoading, locationData: $locationData, weatherData: $weatherData, forecastData: $forecastData)';
   }
 
   @override
@@ -692,28 +655,12 @@ class _$_WeatherState implements _WeatherState {
             (identical(other.weatherData, weatherData) ||
                 other.weatherData == weatherData) &&
             const DeepCollectionEquality()
-                .equals(other._forecastData, _forecastData) &&
-            (identical(other.selectedTemp, selectedTemp) ||
-                other.selectedTemp == selectedTemp) &&
-            (identical(other.selectedWindSpeed, selectedWindSpeed) ||
-                other.selectedWindSpeed == selectedWindSpeed) &&
-            (identical(other.selectedPressure, selectedPressure) ||
-                other.selectedPressure == selectedPressure) &&
-            (identical(other.selectedDistance, selectedDistance) ||
-                other.selectedDistance == selectedDistance));
+                .equals(other._forecastData, _forecastData));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      locationData,
-      weatherData,
-      const DeepCollectionEquality().hash(_forecastData),
-      selectedTemp,
-      selectedWindSpeed,
-      selectedPressure,
-      selectedDistance);
+  int get hashCode => Object.hash(runtimeType, isLoading, locationData,
+      weatherData, const DeepCollectionEquality().hash(_forecastData));
 
   @JsonKey(ignore: true)
   @override
@@ -727,11 +674,7 @@ abstract class _WeatherState implements WeatherState {
       {required final bool isLoading,
       required final LocationModel locationData,
       required final WeatherModel weatherData,
-      required final List<WeatherModel> forecastData,
-      required final SelectUnit selectedTemp,
-      required final SelectUnit selectedWindSpeed,
-      required final SelectUnit selectedPressure,
-      required final SelectUnit selectedDistance}) = _$_WeatherState;
+      required final List<WeatherModel> forecastData}) = _$_WeatherState;
 
   @override
   bool get isLoading;
@@ -741,14 +684,6 @@ abstract class _WeatherState implements WeatherState {
   WeatherModel get weatherData;
   @override
   List<WeatherModel> get forecastData;
-  @override // Option
-  SelectUnit get selectedTemp;
-  @override
-  SelectUnit get selectedWindSpeed;
-  @override
-  SelectUnit get selectedPressure;
-  @override
-  SelectUnit get selectedDistance;
   @override
   @JsonKey(ignore: true)
   _$$_WeatherStateCopyWith<_$_WeatherState> get copyWith =>
